@@ -27,24 +27,6 @@ def frog_jump_min_energy(heights):
     return prev1
 
 
-def frog_jump_min_energy_original(heights):
-    """
-    Original O(n) space solution for comparison
-    Time Complexity: O(n)
-    Space Complexity: O(n) - uses full DP array
-    """
-    n = len(heights)
-    if n == 0:
-        return 0
-    dp = [0] * n
-    dp[0] = 0
-    for i in range(1, n):
-        one_step = dp[i-1] + abs(heights[i] - heights[i-1])
-        two_step = dp[i-2] + abs(heights[i] - heights[i-2]) if i > 1 else float('inf')
-        dp[i] = min(one_step, two_step)
-    return dp[-1]
-
-
 def test_frog_jump_solutions():
     """Test both original and space-optimized solutions"""
     
@@ -91,15 +73,10 @@ def test_frog_jump_solutions():
         # Test space-optimized solution
         result_optimized = frog_jump_min_energy(heights)
         
-        # Test original solution
-        result_original = frog_jump_min_energy_original(heights)
-        
         print(f"Test {i}: {test['description']}")
         print(f"  Heights: {heights}")
         print(f"  Expected: {expected}")
         print(f"  Space-Optimized: {result_optimized} {'✓' if result_optimized == expected else '✗'}")
-        print(f"  Original: {result_original} {'✓' if result_original == expected else '✗'}")
-        print(f"  Solutions Match: {'✓' if result_optimized == result_original else '✗'}")
         print()
 
 
@@ -128,10 +105,47 @@ def analyze_space_complexity():
     print(f"  Space savings: ~{((n-2)/n)*100:.1f}%")
 
 
+def climb_stairs(n):
+    """
+    Classic climbing stairs problem (LeetCode 70):
+    Given n stairs (0 is ground, n is the top), return the number of distinct ways to reach the top,
+    taking 1 or 2 steps at a time.
+    Space-optimized DP: O(n) time, O(1) space.
+    """
+    if n == 0 or n == 1:
+        return 1
+    prev2, prev1 = 1, 1  # Ways to reach step 0 and 1
+    for i in range(2, n + 1):
+        current = prev1 + prev2
+        prev2 = prev1
+        prev1 = current
+    return prev1
+
+
+def test_climb_stairs():
+    print("Testing Climbing Stairs Solutions:")
+    print("=" * 50)
+    test_cases = [
+        (0, 1),  # Only one way: stay at ground
+        (1, 1),  # Only one way: single step
+        (2, 2),  # (1+1), (2)
+        (3, 3),  # (1+1+1), (1+2), (2+1)
+        (4, 5),  # (1+1+1+1), (1+1+2), (1+2+1), (2+1+1), (2+2)
+        (5, 8),
+        (10, 89)
+    ]
+    for n, expected in test_cases:
+        result = climb_stairs(n)
+        print(f"n={n}: ways={result} (expected={expected}) {'✓' if result == expected else '✗'}")
+    print()
+
+
 if __name__ == "__main__":
     test_frog_jump_solutions()
     analyze_space_complexity()
+    test_climb_stairs()
 
 # Example usage:
 # heights = [10, 30, 40, 20]
 # print(frog_jump_min_energy(heights))  # Output: 30
+# print(climb_stairs(4))  # Output: 5
