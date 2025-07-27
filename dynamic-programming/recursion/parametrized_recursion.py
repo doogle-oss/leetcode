@@ -27,6 +27,15 @@ def sum_n_parametrized(n, acc=0):
     return sum_n_parametrized(n-1, acc+n)
 
 
+def factorial_functional(n):
+    """
+    Functional recursion: returns factorial of n.
+    """
+    if n <= 1:
+        return 1
+    return n * factorial_functional(n-1)
+
+
 def test_sum_n():
     print(sum_n(0))   # 0
     print(sum_n(1))   # 1
@@ -44,6 +53,14 @@ def test_sum_n_methods():
     sum_n_parametrized(10)       # 55
 
 
+def test_factorial_functional():
+    print(factorial_functional(0))   # 1
+    print(factorial_functional(1))   # 1
+    print(factorial_functional(5))   # 120
+    print(factorial_functional(10))  # 3628800
+
+
 if __name__ == "__main__":
     test_sum_n()
     test_sum_n_methods()
+    test_factorial_functional()
