@@ -71,7 +71,6 @@ def test_union_intersection():
         print()
 
 
-
 def move_zeros_to_end(arr: List[int]) -> None:
     """
     Moves all zeros to the end of the array in place.
@@ -85,6 +84,7 @@ def move_zeros_to_end(arr: List[int]) -> None:
             pos += 1
     for i in range(pos, n):
         arr[i] = 0
+
 
 def move_zeros_to_beginning(arr: List[int]) -> None:
     """
@@ -100,6 +100,7 @@ def move_zeros_to_beginning(arr: List[int]) -> None:
     for i in range(pos, -1, -1):
         arr[i] = 0
 
+
 def test_move_zeros():
     arrs = [
         [0, 1, 0, 3, 12],
@@ -108,7 +109,7 @@ def test_move_zeros():
         [1, 2, 3, 4],
         [],
         [0],
-        [0, 1, 0, 1, 0, 1]
+        [0, 1, 0, 1, 0, 1],
     ]
     for arr in arrs:
         a = arr.copy()
@@ -118,6 +119,7 @@ def test_move_zeros():
         move_zeros_to_beginning(b)
         print(f"Move zeros to beginning: {arr} -> {b}")
         print()
+
 
 if __name__ == "__main__":
     test_union_intersection()
