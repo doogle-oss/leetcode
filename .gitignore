@@ -205,3 +205,11 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# macOS Finder specific file
+#  This file is created by macOS Finder to store custom attributes of a folder such as
+#  icon position, view options, etc. It is not needed for version control and can
+#  be safely ignored.
+#  It is recommended to add this to the global gitignore or merge it into this file
+#  to avoid committing it in any repository.
+.DS_Store 
